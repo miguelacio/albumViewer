@@ -8,6 +8,8 @@ export type User = {
   company: Company;
 };
 
+export type UserWithAlbum = User & Album;
+
 export type Address = {
   street: string;
   suite: string;
@@ -25,4 +27,9 @@ export type Company = {
   name: string;
   catchPhrase: string;
   bs: string;
+};
+
+export type Album = {
+  id: string;
+  thumbnailUrl: string;
 };
