@@ -1,12 +1,15 @@
 import React, {useEffect} from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {SafeAreaView, SectionList} from 'react-native';
 import {AlbumCard} from '../../components/albumCard';
 import albumStyles from './style';
-import {UserCard} from '../../components/userCard/indext';
+import {UserCard} from '../../components/userCard';
 import {useAppSelector, useAppDispatch} from '../../app/hooks';
 import {fetchUsers} from './thunks';
 
-export const Users = () => {
+import {mapUserToSectionList} from '../../utils/mapUserToSectionList';
+import {Separator} from '../../components/separator';
+
+export const Users = ({navigation}: {navigation: any}): JSX.Element => {
   const dispatch = useAppDispatch();
   const users = useAppSelector(state => state.users.users);
 
@@ -14,11 +17,34 @@ export const Users = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
+  const renderItem = ({
+    item,
+  }: {
+    item: {userId: string; id: string; title: string};
+  }) => {
+    return (
+      <AlbumCard
+        title={item.title}
+        onPressAlbum={() => navigation.navigate('Details')}
+      />
+    );
+  };
+
+  const renderHeader = ({section}: {section: {title: string}}) => (
+    <UserCard userName={section.title} />
+  );
+
   return (
     <SafeAreaView style={albumStyles.container}>
-      <Text>Albums Screen Screen</Text>
-      <UserCard userName="example" />
-      <AlbumCard title="example" onPressAlbum={() => {}} />
+      <SectionList
+        sections={mapUserToSectionList(users)}
+        keyExtractor={({id}, index) => id + index}
+        renderItem={renderItem}
+        renderSectionHeader={renderHeader}
+        horizontal={false}
+        SectionSeparatorComponent={Separator}
+        ItemSeparatorComponent={Separator}
+      />
     </SafeAreaView>
   );
 };

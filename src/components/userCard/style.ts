@@ -6,5 +6,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+    backgroundColor: '#315C2B',
+  },
+  textStyle: {
+    fontWeight: '700',
+    color: '#fff',
+    fontSize: 20,
   },
 });

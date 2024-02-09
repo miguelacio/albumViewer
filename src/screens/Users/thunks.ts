@@ -3,9 +3,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {Album, User} from '../../app/types';
 
-const URL_USERS = 'https://jsonplaceholder.typicode.com/users';
-const URL_ALBUMS_BY_USER_ID =
-  'https://jsonplaceholder.typicode.com/albums?userId=';
+const URL_USERS = 'https://jsonplaceholder.typicode.com/users/';
+const URL_SUFFIX = '/albums';
 
 export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
   try {
@@ -14,12 +13,18 @@ export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
     const usersWithAlbums = [];
 
     for (const user of data) {
-      const {data: albums} = await axios.get<Album[]>(
-        `${URL_ALBUMS_BY_USER_ID}{${user.id}}`,
-      );
+      const URL_ALBUMS_BY_USER = `${URL_USERS}${user.id}${URL_SUFFIX}`;
+
+      const {data: albums} = await axios.get<Album[]>(URL_ALBUMS_BY_USER);
+
       usersWithAlbums.push({...user, albums});
     }
 
     return usersWithAlbums;
-  } catch (e) {}
+  } catch (e) {
+    console.log('------e');
+    console.log('----', e);
+    console.log('------e');
+    return [];
+  }
 });

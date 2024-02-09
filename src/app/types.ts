@@ -8,7 +8,16 @@ export type User = {
   company: Company;
 };
 
-export type UserWithAlbum = User & Album;
+export type UserWithAlbum = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  website: string;
+  address: Address;
+  company: Company;
+  albums: Album[];
+};
 
 export type Address = {
   street: string;

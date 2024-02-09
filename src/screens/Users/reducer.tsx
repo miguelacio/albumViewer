@@ -19,7 +19,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    deleteAlbum: (state, action: PayloadAction) => {
+    deleteAlbum: state => {
       state.users = [];
     },
   },

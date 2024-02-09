@@ -9,7 +9,7 @@ export const UserCard = ({
 }): JSX.Element => {
   return (
     <View style={albumStyle.container}>
-      <Text>{userName}</Text>
+      <Text style={albumStyle.textStyle}>{userName}</Text>
     </View>
   );
 };
