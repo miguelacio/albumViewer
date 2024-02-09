@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {User} from '../../app/types';
-
+import {UserWithAlbum} from '../../app/types';
+import {fetchUsers} from './thunks';
 // Define a type for the User state
 interface UserState {
-  users: User[];
+  users: UserWithAlbum[];
   isLoading: boolean;
   error: any;
 }
@@ -19,17 +19,23 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUsers: (state, action: PayloadAction<User[]>) => {
-      state.users = action.payload;
-      state.isLoading = false;
+    deleteAlbum: (state, action: PayloadAction) => {
+      state.users = [];
     },
-    setUsersError: state => {
-      state.error = 'Something went horribly wrong';
-      state.isLoading = false;
-    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload as any;
+        state.isLoading = false;
+      })
+      .addCase(fetchUsers.rejected, state => {
+        state.error = 'Something went horribly Wrong';
+        state.isLoading = false;
+      });
   },
 });
 
-export const {setUsers, setUsersError} = userSlice.actions;
+export const {deleteAlbum} = userSlice.actions;
 
 export default userSlice.reducer;
