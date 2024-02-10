@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {fetchPhotos} from './thunks';
 import {PhotoItem} from '../../components/photo';
 import {deletePhotos} from './reducer';
+import {Empty} from '../../components/emptyComponent';
 
 export const AlbumDetail = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,6 @@ export const AlbumDetail = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(fetchPhotos());
-
     return () => {
       dispatch(deletePhotos());
     };
@@ -29,6 +29,7 @@ export const AlbumDetail = (): JSX.Element => {
           numColumns={3}
           renderItem={({item}) => <PhotoItem photo={item} />}
           keyExtractor={(item, index) => `${item.id}${index}`}
+          ListEmptyComponent={Empty}
         />
       )}
     </SafeAreaView>

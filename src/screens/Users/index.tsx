@@ -8,6 +8,7 @@ import {fetchUsers} from './thunks';
 import {deleteAlbum, selectAlbum} from './reducer';
 import {mapUserToSectionList} from '../../utils/mapUserToSectionList';
 import {Separator} from '../../components/separator';
+import {Empty} from '../../components/emptyComponent';
 
 export const Users = ({navigation}: {navigation: any}): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -54,6 +55,7 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
           horizontal={false}
           SectionSeparatorComponent={Separator}
           ItemSeparatorComponent={Separator}
+          ListEmptyComponent={Empty}
         />
       )}
     </SafeAreaView>

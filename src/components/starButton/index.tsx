@@ -8,7 +8,7 @@ export const StarButton = ({
 }: {
   selected: boolean;
   onPressStar: () => void;
-}) => {
+}): JSX.Element => {
   return (
     <TouchableOpacity style={starButtonStyle.container} onPress={onPressStar}>
       <Image

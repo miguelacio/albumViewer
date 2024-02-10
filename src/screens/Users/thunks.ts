@@ -22,9 +22,6 @@ export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
 
     return usersWithAlbums;
   } catch (e) {
-    console.log('------e');
-    console.log('----', e);
-    console.log('------e');
     return [];
   }
 });
