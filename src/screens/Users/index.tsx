@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, SectionList} from 'react-native';
+import {ActivityIndicator, SafeAreaView, SectionList} from 'react-native';
 import {AlbumCard} from '../../components/albumCard';
 import userStyles from './style';
 import {UserCard} from '../../components/userCard';
@@ -12,6 +12,7 @@ import {Separator} from '../../components/separator';
 export const Users = ({navigation}: {navigation: any}): JSX.Element => {
   const dispatch = useAppDispatch();
   const users = useAppSelector(state => state.users.users);
+  const isLoading = useAppSelector(state => state.users.isLoading);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -42,15 +43,19 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
 
   return (
     <SafeAreaView style={userStyles.container}>
-      <SectionList
-        sections={mapUserToSectionList(users)}
-        keyExtractor={(item, index) => `${item.id}${index}`}
-        renderItem={renderItem}
-        renderSectionHeader={renderHeader}
-        horizontal={false}
-        SectionSeparatorComponent={Separator}
-        ItemSeparatorComponent={Separator}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color="white" />
+      ) : (
+        <SectionList
+          sections={mapUserToSectionList(users)}
+          keyExtractor={(item, index) => `${item.id}${index}`}
+          renderItem={renderItem}
+          renderSectionHeader={renderHeader}
+          horizontal={false}
+          SectionSeparatorComponent={Separator}
+          ItemSeparatorComponent={Separator}
+        />
+      )}
     </SafeAreaView>
   );
 };

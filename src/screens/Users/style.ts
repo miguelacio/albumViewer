@@ -5,5 +5,6 @@ export default StyleSheet.create({
     flex: 1,
     width: '100%',
     backgroundColor: '#274029',
+    justifyContent: 'center',
   },
 });

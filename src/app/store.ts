@@ -7,6 +7,11 @@ export const store = configureStore({
     users: usersReducer,
     album: albumReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      immutableCheck: {warnAfter: 128},
+      serializableCheck: {warnAfter: 128},
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
