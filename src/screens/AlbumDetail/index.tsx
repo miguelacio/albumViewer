@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text, SafeAreaView} from 'react-native';
+import albumStyles from './style';
 
 export const AlbumDetail = ({navigation}: {navigation: any}): JSX.Element => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <SafeAreaView style={albumStyles.container}>
       <Text>AlbumDetail Screen</Text>
-    </View>
+    </SafeAreaView>
   );
 };

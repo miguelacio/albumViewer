@@ -8,10 +8,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
+  nameTouchable: {
+    flex: 1,
+    height: '100%',
+  },
   albumName: {
+    marginTop: 14,
     marginLeft: 24,
   },
-  touchable: {
+
+  deleteTouchable: {
     padding: 12,
   },
 });

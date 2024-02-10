@@ -1,4 +1,4 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {UserWithAlbum} from '../../app/types';
 import {fetchUsers} from './thunks';
 // Define a type for the User state
@@ -6,7 +6,6 @@ interface UserState {
   users: UserWithAlbum[];
   isLoading: boolean;
   error: any;
-  selectedAlbum: number;
 }
 
 // Define the initial state using that type
@@ -14,26 +13,14 @@ const initialState: UserState = {
   users: [],
   isLoading: true,
   error: null,
-  selectedAlbum: -1,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    deleteAlbum: (state, action: PayloadAction<number>) => {
-      const tmpArray = state.users;
-      const objWithIdIndex = tmpArray.findIndex(
-        obj => obj.id === action.payload,
-      );
-
-      if (objWithIdIndex > -1) {
-        tmpArray.splice(objWithIdIndex, 1);
-      }
-      state.users = tmpArray;
-    },
-    selectAlbum: (state, action: PayloadAction<number>) => {
-      state.selectedAlbum = action.payload;
+    deleteAlbum: state => {
+      state.users = [];
     },
   },
   extraReducers: builder => {
@@ -49,6 +36,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {deleteAlbum, selectAlbum} = userSlice.actions;
+export const {deleteAlbum} = userSlice.actions;
 
 export default userSlice.reducer;

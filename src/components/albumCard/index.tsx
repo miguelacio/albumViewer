@@ -5,14 +5,20 @@ import albumStyle from './style';
 export const AlbumCard = ({
   title = 'N/A',
   onPressAlbum,
+  onDeleteAlbum,
 }: {
   title: string;
   onPressAlbum: () => void;
+  onDeleteAlbum: () => void;
 }): JSX.Element => {
   return (
     <View style={albumStyle.container}>
-      <Text style={albumStyle.albumName}>{title}</Text>
-      <TouchableOpacity onPress={onPressAlbum} style={albumStyle.touchable}>
+      <TouchableOpacity style={albumStyle.nameTouchable} onPress={onPressAlbum}>
+        <Text style={albumStyle.albumName}>{title}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={onDeleteAlbum}
+        style={albumStyle.deleteTouchable}>
         <Image source={require('../../assets/remove_ic.png')} />
       </TouchableOpacity>
     </View>
