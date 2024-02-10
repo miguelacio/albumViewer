@@ -1,12 +1,12 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {UserWithAlbum} from '../../app/types';
+import {Album, UserWithAlbum} from '../../app/types';
 import {fetchUsers} from './thunks';
 // Define a type for the User state
-interface UserState {
+export interface UserState {
   users: UserWithAlbum[];
   isLoading: boolean;
   error: any;
-  selectedAlbum: number;
+  selectedAlbum: Album | null;
 }
 
 // Define the initial state using that type
@@ -14,7 +14,7 @@ const initialState: UserState = {
   users: [],
   isLoading: true,
   error: null,
-  selectedAlbum: -1,
+  selectedAlbum: null,
 };
 
 export const userSlice = createSlice({
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
       }
       state.users = tmpArray;
     },
-    selectAlbum: (state, action: PayloadAction<number>) => {
+    selectAlbum: (state, action: PayloadAction<Album>) => {
       state.selectedAlbum = action.payload;
     },
   },

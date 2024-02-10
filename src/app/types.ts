@@ -39,6 +39,15 @@ export type Company = {
 };
 
 export type Album = {
-  id: string;
+  id: number;
+  title: string;
+  userId: number;
+};
+
+export type Photo = {
+  id: number;
+  albumId: number;
+  title: string;
   thumbnailUrl: string;
+  url: string;
 };

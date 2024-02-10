@@ -1,9 +1,11 @@
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import usersReducer from '../screens/Users/reducer';
+import albumReducer from '../screens/AlbumDetail/reducer';
 
 export const store = configureStore({
   reducer: {
     users: usersReducer,
+    album: albumReducer,
   },
 });
 

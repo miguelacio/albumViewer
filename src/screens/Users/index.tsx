@@ -6,7 +6,6 @@ import {UserCard} from '../../components/userCard';
 import {useAppSelector, useAppDispatch} from '../../app/hooks';
 import {fetchUsers} from './thunks';
 import {deleteAlbum, selectAlbum} from './reducer';
-
 import {mapUserToSectionList} from '../../utils/mapUserToSectionList';
 import {Separator} from '../../components/separator';
 
@@ -21,13 +20,13 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
   const renderItem = ({
     item,
   }: {
-    item: {userId: string; id: number; title: string};
+    item: {userId: number; id: number; title: string};
   }) => {
     return (
       <AlbumCard
         title={item.title}
         onPressAlbum={() => {
-          dispatch(selectAlbum(item.id));
+          dispatch(selectAlbum(item));
           navigation.navigate('Details');
         }}
         onDeleteAlbum={() => {
@@ -45,9 +44,7 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
     <SafeAreaView style={userStyles.container}>
       <SectionList
         sections={mapUserToSectionList(users)}
-        keyExtractor={(item, index) => {
-          return `${item.id}${index}`;
-        }}
+        keyExtractor={(item, index) => `${item.id}${index}`}
         renderItem={renderItem}
         renderSectionHeader={renderHeader}
         horizontal={false}
