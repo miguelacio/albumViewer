@@ -10,7 +10,7 @@ export interface UserState {
 }
 
 // Define the initial state using that type
-const initialState: UserState = {
+export const initialState: UserState = {
   users: [],
   isLoading: true,
   error: null,
@@ -21,16 +21,27 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    deleteAlbum: (state, action: PayloadAction<number>) => {
-      const tmpArray = state.users;
-      const objWithIdIndex = tmpArray.findIndex(
-        obj => obj.id === action.payload,
+    deleteAlbum: (state, action: PayloadAction<Album>) => {
+      const tmpUsersArray = state.users;
+      const userId = tmpUsersArray.findIndex(
+        obj => obj.id === action.payload.userId,
       );
 
-      if (objWithIdIndex > -1) {
-        tmpArray.splice(objWithIdIndex, 1);
+      const userToDeleteAlbum = tmpUsersArray[userId];
+
+      const albumId = userToDeleteAlbum.albums.findIndex(
+        obj => obj.id === action.payload.id,
+      );
+
+      if (albumId > -1) {
+        userToDeleteAlbum.albums.splice(albumId, 1);
       }
-      state.users = tmpArray;
+
+      const result = tmpUsersArray.map(item =>
+        item.id === userToDeleteAlbum.id ? userToDeleteAlbum : item,
+      );
+
+      state.users = result;
     },
     selectAlbum: (state, action: PayloadAction<Album>) => {
       state.selectedAlbum = action.payload;

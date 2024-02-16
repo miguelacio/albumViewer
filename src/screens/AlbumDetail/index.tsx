@@ -22,7 +22,11 @@ export const AlbumDetail = (): JSX.Element => {
   return (
     <SafeAreaView style={albumStyles.container}>
       {isLoading ? (
-        <ActivityIndicator size="large" color="white" />
+        <ActivityIndicator
+          size="large"
+          color="white"
+          testID="TestLoaderAlbumDetail"
+        />
       ) : (
         <FlatList
           data={photos}

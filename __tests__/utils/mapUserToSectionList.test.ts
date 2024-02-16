@@ -1,4 +1,4 @@
-import {mapUserToSectionList} from './mapUserToSectionList';
+import {mapUserToSectionList} from '../../src/utils/mapUserToSectionList';
 
 const testUsers = [
   {

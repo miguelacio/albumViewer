@@ -32,7 +32,7 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
           navigation.navigate('Details');
         }}
         onDeleteAlbum={() => {
-          dispatch(deleteAlbum(item.id));
+          dispatch(deleteAlbum(item));
         }}
       />
     );
@@ -45,7 +45,11 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
   return (
     <SafeAreaView style={userStyles.container}>
       {isLoading ? (
-        <ActivityIndicator size="large" color="white" />
+        <ActivityIndicator
+          size="large"
+          color="white"
+          testID="TestLoaderUsers"
+        />
       ) : (
         <SectionList
           sections={mapUserToSectionList(users)}
