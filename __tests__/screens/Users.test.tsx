@@ -2,6 +2,7 @@ import 'react-native';
 import React from 'react';
 import {renderWithProviders} from '../../src/utils/test-utils';
 import {Users} from '../../src/screens/Users';
+import {fireEvent} from '@testing-library/react-native';
 
 import {initialState} from '../../src/screens/Users/reducer';
 const mockNavigation = {navigate: jest.fn()};
@@ -40,7 +41,7 @@ describe('Users', () => {
     expect(screen.getByTestId('TestLoaderUsers')).toBeDefined();
   });
 
-  test('Shows a users when receives data', async () => {
+  test('Shows some users when receives data', async () => {
     let screen = renderWithProviders(<Users navigation={mockNavigation} />, {
       preloadedState: {
         users: {
@@ -52,6 +53,22 @@ describe('Users', () => {
     });
 
     expect(screen.getByTestId('TestSectionListUsers')).toBeDefined();
+  });
+
+  test('Navigates to album detail when one album is pressed', async () => {
+    let screen = renderWithProviders(<Users navigation={mockNavigation} />, {
+      preloadedState: {
+        users: {
+          ...initialState,
+          users: testUsers,
+          isLoading: false,
+        },
+      },
+    });
+
+    const button = screen.getAllByTestId('TouchableSelectAlbum');
+    fireEvent.press(button[0]);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('Details');
   });
   test('Shows a sad dog when it receives data but its empty', async () => {
     let screen = renderWithProviders(<Users navigation={mockNavigation} />, {
