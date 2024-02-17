@@ -52,6 +52,7 @@ export const Users = ({navigation}: {navigation: any}): JSX.Element => {
         />
       ) : (
         <SectionList
+          testID="TestSectionListUsers"
           sections={mapUserToSectionList(users)}
           keyExtractor={(item, index) => `${item.id}${index}`}
           renderItem={renderItem}

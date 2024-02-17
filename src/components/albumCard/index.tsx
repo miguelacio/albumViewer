@@ -13,12 +13,16 @@ export const AlbumCard = ({
 }): JSX.Element => {
   return (
     <View style={albumStyle.container}>
-      <TouchableOpacity style={albumStyle.nameTouchable} onPress={onPressAlbum}>
+      <TouchableOpacity
+        style={albumStyle.nameTouchable}
+        onPress={onPressAlbum}
+        testID="TouchableSelectAlbum">
         <Text style={albumStyle.albumName}>{title}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={onDeleteAlbum}
-        style={albumStyle.deleteTouchable}>
+        style={albumStyle.deleteTouchable}
+        testID="TouchableDeleteAlbum">
         <Image source={require('../../assets/remove_ic.png')} />
       </TouchableOpacity>
     </View>

@@ -14,10 +14,10 @@ export default StyleSheet.create({
   },
   albumName: {
     marginTop: 14,
+    marginBottom: 14,
     marginLeft: 24,
     color: '#274029',
   },
-
   deleteTouchable: {
     padding: 12,
   },
